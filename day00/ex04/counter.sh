@@ -19,3 +19,15 @@ fi;
 FILE_NAME="hh_uniq_positions.csv"
 
 echo "\"$2\",\"count\"" > $FILE_NAME;
+
+str=$(head -n 1 $1)
+IFS=", " read -ra ADDR <<< "$str"
+column=1
+for i in "${ADDR[@]}"; do
+    word="${i:1}"
+    word=${word%?}
+    [[ "$word" == "$2" ]] && break
+    ((++column))
+done
+
+tail -n +2 $1 | awk -F',' -v col=$column 'BEGIN {OFS =FS} { print $col}' | sort | uniq -ci | awk -F' ' 'BEGIN {} { print $2 "," $1 }' >>  $FILE_NAME 

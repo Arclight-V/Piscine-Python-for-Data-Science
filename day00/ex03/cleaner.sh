@@ -57,7 +57,7 @@ cleaner()
   else if (tolower($col) ~ "t_replace")
     $col = "\"Senior\""
   else
-    $col = "\"-"
+    $col = "\"-\""
     print $0
 }'
 }
