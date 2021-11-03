@@ -11,7 +11,6 @@ def stock_prices(company_name):
         'Tesla': 'TSLA',
         'Nokia': 'NOK'
         }
-
     STOCKS = {
         'AAPL': 287.73,
         'MSFT': 173.79,
