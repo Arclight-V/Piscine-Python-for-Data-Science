@@ -1,0 +1,8 @@
+ivan.ivanov@corp.com
+petr.petrov@corp.com
+maria.marchenko@corp.com
+alex.alexandrov@corp.com
+vova.vladimirov@corp.com
+emma.geller@corp.com
+john.smith@corp.com
+bob.surname@corp.com
