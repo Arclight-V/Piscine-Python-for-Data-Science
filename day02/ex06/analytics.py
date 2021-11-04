@@ -1,6 +1,6 @@
 import json
 # to upload requests
-# import requests
+import requests
 from config import not_creat_report
 from config import url_to_send
 from random import randint
@@ -41,12 +41,11 @@ class Research:
         
     @staticmethod
     def send_message_to_slack(message, webhook_url=None):
-        if webhook_url is not None:
-            requests.post(
-                webhook_url,
-                data=json.dumps({'text': message}),
-                headers={'Content-Type': 'application/json'}
-                )  
+        requests.post(
+            webhook_url,
+            data=json.dumps({'text': message}),
+            headers={'Content-Type': 'application/json'}
+            )  
             
     class Calculations:
         def __init__(self, data):
