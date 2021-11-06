@@ -11,3 +11,6 @@ This day will help you to get the basic knowledge about OOP approach in Python.
 ### Day03
 Intro to Python: Package management and virtual environment
 Today we will help you acquire basic knowledge about how to manage libraries in Python and work with virtual environments.
+### Day04
+Intro to Python: Efficient code practices
+Today we will help you write code that works faster.
