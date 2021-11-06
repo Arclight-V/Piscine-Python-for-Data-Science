@@ -1,6 +1,6 @@
 import sys
 import os
-import time
+# import time
 from bs4 import BeautifulSoup
 import requests
 
@@ -20,7 +20,12 @@ def financial(ticker_symbol, field_of_the_table):
         i += 6
     if i >= len(list_all_field):
         raise Exception(f'Error! Field \'{field_of_the_table}\' not found')
-    return list_all_field.insert(0, field_of_the_table)
+    return (field_of_the_table,
+            list_all_field[i + 1],
+            list_all_field[i + 2],
+            list_all_field[i + 3],
+            list_all_field[i + 4],
+            list_all_field[1 + 5])
 
 
 if __name__ == '__main__':
@@ -43,3 +48,39 @@ if __name__ == '__main__':
     except KeyError as kerr:
         print(f'KeyError: {kerr} is None')
 
+
+# chek if the pytest is installed
+# pip list
+# example starting from command line
+# pytest -v financial_test.py
+def test_revenue():
+    info = financial('MSFT', 'Total Revenue')
+    assert info[0] == 'Total Revenue'
+
+
+def test_return_tuple():
+    info = financial('MSFT', 'Total Revenue')
+    assert type(info) == tuple
+
+
+def test_return_exception_one():
+    try:
+        financial('MSFT', 'To')
+        assert False
+    except:
+        assert Exception
+
+
+def test_return_exception_two():
+    try:
+        financial('kkkkkkkkkkkkkkkkkkkk', 'Total Revenue')
+        assert False
+    except:
+        assert AttributeError
+
+def test_return_exception_three():
+    try:
+        financial(1, 1)
+        assert False
+    except:
+        assert AttributeError
