@@ -20,9 +20,18 @@ def ft_my_top(list_random_values):
     top = 10
     return sorted(ft_my_function(list_random_values).items(), key=lambda item: -item[1])[:top]
 
+def ft_counter(list_random_values):
+    return dict(Counter(list_random_values))
+
+def top_counter(list_random_values):
+    top = 10
+    return Counter(list_random_values).most_common(10)
+
 def benchmark():
     list_random_values = [random.randint(1, 100) for i in range(1000000)]
     print(ft_my_top(list_random_values))
+    ft_counter(list_random_values)
+    print(top_counter(list_random_values))
 
     # number_of_sum = param[2]
     # setup_str = f"""from __main__ import {param[0]}"""
