@@ -23,21 +23,37 @@ def ft_my_top(list_random_values):
 def ft_counter(list_random_values):
     return dict(Counter(list_random_values))
 
-def top_counter(list_random_values):
+def ft_top_counter(list_random_values):
     top = 10
     return Counter(list_random_values).most_common(10)
 
 def benchmark():
     list_random_values = [random.randint(1, 100) for i in range(1000000)]
-    print(ft_my_top(list_random_values))
+    ft_my_top(list_random_values)
     ft_counter(list_random_values)
-    print(top_counter(list_random_values))
+    ft_top_counter(list_random_values)
 
-    # number_of_sum = param[2]
-    # setup_str = f"""from __main__ import {param[0]}"""
-    # func_to_benchmark = f'{param[0]}({number_of_sum})'
-    #
-    # return timeit.timeit(setup=setup_str, stmt=func_to_benchmark, number=param[1])
+    ft_my_function_str = 'ft_my_function'
+    ft_my_top_str = 'ft_my_top'
+    ft_counter_str = 'ft_counter'
+    ft_top_counter_str = 'ft_top_counter'
+
+    setup_str = f"""
+from __main__ import {ft_my_function_str}, {ft_my_top_str}, {ft_counter_str}, {ft_top_counter_str}
+list_random_values = {list_random_values}
+
+"""
+    ft_my_function_timeit = f'{ft_my_function_str}(list_random_values)'
+    ft_my_top_timeit = f'{ft_my_top_str}(list_random_values)'
+    ft_counter_timeit = f'{ft_counter_str}(list_random_values)'
+    ft_top_counter_timeit = f'{ft_top_counter_str}(list_random_values)'
+
+    timeit1 = timeit.timeit(setup=setup_str, stmt=ft_my_function_timeit, number=1)
+    timeit2 = timeit.timeit(setup=setup_str, stmt=ft_my_top_timeit, number=1)
+    timeit3 = timeit.timeit(setup=setup_str, stmt=ft_counter_timeit, number=1)
+    timeit4 = timeit.timeit(setup=setup_str, stmt=ft_top_counter_timeit, number=1)
+
+    return [timeit1, timeit2, timeit3, timeit4]
 
 if __name__ == '__main__':
     benchmark_data = benchmark()
