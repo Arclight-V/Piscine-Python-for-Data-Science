@@ -15,6 +15,10 @@ def list_comprehension(atemail, src_emails):
     return [atemail for atemail in src_emails if atemail.endswith(atemail)]
 
 
+def map_func(atemail, src_emails):
+    return map(lambda x: x if x.endswith(atemail) else None, src_emails)
+    # return list(map(lambda x: x if x.endswith(atemail) else None, src_emails))
+
 if __name__ == '__main__':
     emails = ['john@gmail.com',
               'james@gmail.com',
@@ -27,11 +31,20 @@ if __name__ == '__main__':
 
     loop_function = 'loop(atgmail, emails)'
     comprehension_function = 'list_comprehension(atgmail, emails)'
+    map_function = 'map_func(atgmail, emails)'
 
     timeit_loop = timeit.timeit(loop_function, globals=globals(), number=number_of_repetitions)
     timeit_comprehension = timeit.timeit(comprehension_function, globals=globals(), number=number_of_repetitions)
+    timeit_map = timeit.timeit(map_function, globals=globals(), number=number_of_repetitions)
 
-    if timeit_comprehension <= timeit_loop:
-        print(f'it is better to use a list comprehension\n{timeit_comprehension} vs {timeit_loop}')
+    sort_time_list = sorted([timeit_loop, timeit_comprehension, timeit_map])
+
+    if sort_time_list[0] == timeit_loop:
+        best_result = 'loop'
+    elif sort_time_list[0] == timeit_comprehension:
+        best_result = 'list comprehension'
     else:
-        print(f'it is better to use a loop\n{timeit_loop} vs {timeit_comprehension}')
+        best_result = 'map'
+
+    print(f'it is better to use {best_result}\n'
+          f'{sort_time_list[0]} vs {sort_time_list[1]} vs {sort_time_list[2]}')
